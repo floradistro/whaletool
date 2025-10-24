@@ -1,0 +1,347 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+/* Flowchart Section */
+.flowchart-section {
+  padding: 120px 24px;
+  background: transparent;
+  font-family: 'Roboto', sans-serif;
+}
+
+.canvas-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.reactflow-container {
+  height: 650px;
+  background: transparent;
+  overflow: hidden;
+}
+
+/* Custom Workflow Nodes */
+.workflow-node {
+  background: #0a0a0a;
+  border: 5px solid rgba(156, 163, 175, 0.2);
+  border-radius: 50%;
+  padding: 0;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  width: 120px;
+  height: 120px;
+}
+
+.workflow-node:hover {
+  border-color: rgba(156, 163, 175, 0.4);
+  transform: scale(1.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* Color Variants */
+.workflow-node.node-blue {
+  border-color: rgba(59, 130, 246, 0.25);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(37, 99, 235, 0.02));
+}
+
+.workflow-node.node-blue:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15);
+}
+
+.workflow-node.node-purple {
+  border-color: rgba(139, 92, 246, 0.25);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(124, 58, 237, 0.02));
+}
+
+.workflow-node.node-purple:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.15);
+}
+
+.workflow-node.node-cyan {
+  border-color: rgba(6, 182, 212, 0.25);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.05), rgba(8, 145, 178, 0.02));
+}
+
+.workflow-node.node-cyan:hover {
+  border-color: rgba(6, 182, 212, 0.4);
+  box-shadow: 0 8px 32px rgba(6, 182, 212, 0.15);
+}
+
+.workflow-node.node-orange {
+  border-color: rgba(249, 115, 22, 0.25);
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.05), rgba(234, 88, 12, 0.02));
+}
+
+.workflow-node.node-orange:hover {
+  border-color: rgba(249, 115, 22, 0.4);
+  box-shadow: 0 8px 32px rgba(249, 115, 22, 0.15);
+}
+
+.workflow-node.node-pink {
+  border-color: rgba(236, 72, 153, 0.25);
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.05), rgba(219, 39, 119, 0.02));
+}
+
+.workflow-node.node-pink:hover {
+  border-color: rgba(236, 72, 153, 0.4);
+  box-shadow: 0 8px 32px rgba(236, 72, 153, 0.15);
+}
+
+.node-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+  height: 100%;
+  text-align: center;
+}
+
+.node-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.node-icon svg {
+  width: 100%;
+  height: 100%;
+  color: #999;
+  stroke-width: 3;
+}
+
+.node-text {
+  display: block;
+}
+
+.node-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ccc;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 0em;
+  margin-top: 6px;
+}
+
+.node-subtitle {
+  display: none;
+}
+
+/* Platform Node (whaletools) */
+.workflow-node.platform {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  width: 280px;
+  height: 360px;
+}
+
+.workflow-node.platform .node-content {
+  padding: 0;
+  gap: 0;
+}
+
+.workflow-node.platform .node-icon {
+  width: 280px;
+  height: 280px;
+  animation: float 6s ease-in-out infinite, glow 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.5));
+  }
+}
+
+.workflow-node.platform .node-icon svg {
+  color: #fff;
+  stroke-width: 3;
+}
+
+.workflow-node.platform .node-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.workflow-node.platform .node-title {
+  display: block;
+  font-size: 42px;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: -0.02em;
+  margin-top: -20px;
+  text-transform: lowercase;
+}
+
+.workflow-node.platform:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.workflow-node.platform:hover .node-icon {
+  animation: float 6s ease-in-out infinite, glow 4s ease-in-out infinite, pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-12px) scale(1.05);
+  }
+}
+
+/* Customer Node */
+.workflow-node.customer {
+  border: 5px solid rgba(34, 197, 94, 0.3);
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.05), rgba(22, 163, 74, 0.02));
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+.workflow-node.customer .node-content {
+  padding: 10px;
+}
+
+.workflow-node.customer .node-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.workflow-node.customer .node-icon svg {
+  color: #fff;
+  stroke-width: 3;
+}
+
+.workflow-node.customer .node-title {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  margin-top: 8px;
+  letter-spacing: 0em;
+}
+
+.workflow-node.customer:hover {
+  border-color: rgba(34, 197, 94, 0.5);
+  transform: scale(1.08);
+  box-shadow: 0 8px 32px rgba(34, 197, 94, 0.15);
+}
+
+/* Label Node */
+.workflow-node.label {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  width: auto;
+  height: auto;
+}
+
+.workflow-node.label .node-content {
+  padding: 8px 16px;
+}
+
+.workflow-node.label .node-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #666;
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.workflow-node.label:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* ReactFlow Edges */
+.react-flow__edge {
+  pointer-events: none !important;
+  z-index: 100 !important;
+}
+
+.react-flow__edge-path {
+  stroke: rgba(255, 255, 255, 0.15) !important;
+  stroke-width: 2px !important;
+  fill: none !important;
+}
+
+.react-flow__edge.animated path {
+  stroke-dasharray: 5 5 !important;
+  animation: flowAnimation 2s linear infinite !important;
+}
+
+@keyframes flowAnimation {
+  to { stroke-dashoffset: -10; }
+}
+
+/* Particle animation on edges */
+.react-flow__edge::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: particle 3s linear infinite;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes particle {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+/* Background */
+.react-flow__background {
+  background-color: transparent !important;
+}
+
+.react-flow__background-pattern {
+  opacity: 0.5 !important;
+}
+
+/* Hide Controls */
+.react-flow__controls,
+.react-flow__attribution {
+  display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .reactflow-container {
+    height: 400px;
+  }
+}
