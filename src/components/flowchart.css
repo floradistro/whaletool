@@ -339,102 +339,17 @@
   display: none !important;
 }
 
-/* Responsive - Mobile Optimization */
+/* Responsive - Mobile uses custom component (MobileFlowchart.jsx) */
 @media (max-width: 768px) {
   .flowchart-section {
     padding: 60px 0;
-    overflow: hidden;
     width: 100%;
-  }
-
-  .canvas-wrapper {
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    max-width: 100vw;
     overflow: hidden;
   }
 
+  /* Hide ReactFlow containers on mobile */
+  .canvas-wrapper,
   .reactflow-container {
-    height: 620px;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden !important;
-  }
-
-  /* Platform Node - Smaller on Mobile */
-  .workflow-node.platform {
-    width: 140px;
-    height: 180px;
-  }
-
-  .workflow-node.platform .node-icon {
-    width: 140px;
-    height: 140px;
-  }
-
-  .workflow-node.platform .node-title {
-    font-size: 20px;
-    margin-top: -8px;
-  }
-
-  /* Component Nodes - Smaller */
-  .workflow-node {
-    width: 60px;
-    height: 60px;
-    border-width: 2px;
-  }
-
-  .node-icon {
-    width: 18px;
-    height: 18px;
-  }
-
-  .node-title {
-    font-size: 8px;
-    margin-top: 3px;
-  }
-
-  /* Customer Node - Smaller */
-  .workflow-node.customer {
-    width: 75px;
-    height: 75px;
-    border-width: 2px;
-  }
-
-  .workflow-node.customer .node-icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  .workflow-node.customer .node-title {
-    font-size: 9px;
-    margin-top: 5px;
-  }
-
-  /* Label Node */
-  .workflow-node.label .node-title {
-    font-size: 9px;
-    letter-spacing: 0.1em;
-  }
-
-  /* Edges - Thinner on Mobile */
-  .react-flow__edge-path {
-    stroke-width: 1.5px !important;
-  }
-
-  /* Background - Smaller Dots */
-  .react-flow__background-pattern {
-    opacity: 0.3 !important;
-  }
-
-  /* Disable Hover Effects on Mobile */
-  .workflow-node:hover {
-    transform: none;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-  }
-
-  .workflow-node.platform:hover .node-icon {
-    animation: float 6s ease-in-out infinite, glow 4s ease-in-out infinite;
+    display: none;
   }
 }
