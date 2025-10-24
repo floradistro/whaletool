@@ -1,6 +1,14 @@
 import '../App.css'
+import { useEffect } from 'react'
 
 function Terms() {
+  useEffect(() => {
+    document.title = 'Terms of Service - Whaletools | Fair Terms, No Games'
+    const metaDescription = document.querySelector('meta[name="description"]')
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Fair terms. No games. Use whaletools, pay $299/month, don\'t break things. Clear terms of service. Updated January 2025.')
+    }
+  }, [])
   return (
     <div className="App">
       {/* Animated Geometric Background */}

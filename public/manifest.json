@@ -1,0 +1,19 @@
+{
+  "name": "Whaletools - Tools for Whales",
+  "short_name": "Whaletools",
+  "description": "Unified retail platform built for growth. POS, E-commerce, Inventory & Analytics.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/yacht-club-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
+

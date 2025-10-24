@@ -1,6 +1,14 @@
 import '../App.css'
+import { useEffect } from 'react'
 
 function Privacy() {
+  useEffect(() => {
+    document.title = 'Privacy Policy - Whaletools | Your Data, Your Rules'
+    const metaDescription = document.querySelector('meta[name="description"]')
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Your data is yours. We don\'t sell it, rent it, or do shady things with it. Clear privacy policy. Updated January 2025.')
+    }
+  }, [])
   return (
     <div className="App">
       {/* Animated Geometric Background */}

@@ -1,7 +1,15 @@
 import '../App.css'
+import { useEffect } from 'react'
 import AITerminal from '../components/AITerminal'
 
 function Features() {
+  useEffect(() => {
+    document.title = 'Features - Whaletools | POS, E-commerce, Inventory & Analytics'
+    const metaDescription = document.querySelector('meta[name="description"]')
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Everything unified. Online store, Point of Sale, Inventory management, and Analytics. AI-native with MCP integration. Developer-friendly API.')
+    }
+  }, [])
   return (
     <div className="App">
       {/* Animated Geometric Background */}

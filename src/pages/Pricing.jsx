@@ -1,6 +1,14 @@
 import '../App.css'
+import { useEffect } from 'react'
 
 function Pricing() {
+  useEffect(() => {
+    document.title = 'Pricing - Whaletools | $299/month, No Transaction Fees'
+    const metaDescription = document.querySelector('meta[name="description"]')
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Simple pricing. $299/month for everything. No transaction fees, no hidden costs, no surprises. Cancel anytime.')
+    }
+  }, [])
   return (
     <div className="App">
       {/* Animated Geometric Background */}

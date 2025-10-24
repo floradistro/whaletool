@@ -4,6 +4,14 @@ import FlowchartCanvas from '../components/FlowchartCanvas'
 import AITerminal from '../components/AITerminal'
 
 function Home() {
+  // Update page title and meta
+  useEffect(() => {
+    document.title = 'Whaletools - Tools for Whales | Unified Retail Platform'
+    const metaDescription = document.querySelector('meta[name="description"]')
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Scale efficiently. Built for retail, engineered for growth. POS, E-commerce, Inventory, and Analytics in one platform.')
+    }
+  }, [])
   const [ecomOrders, setEcomOrders] = useState(247)
   const [posTransactions, setPosTransactions] = useState(89)
   const [syncLatency, setSyncLatency] = useState(12)

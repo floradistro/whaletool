@@ -1,6 +1,14 @@
 import '../App.css'
+import { useEffect } from 'react'
 
 function About() {
+  useEffect(() => {
+    document.title = 'About - Whaletools | Built by Operators, For Operators'
+    const metaDescription = document.querySelector('meta[name="description"]')
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Built by retail operators who know the game. Fair pricing, real-time sync, no lock-in. Tools built right for people who\'ve lived the chaos.')
+    }
+  }, [])
   return (
     <div className="App">
       {/* Animated Geometric Background */}

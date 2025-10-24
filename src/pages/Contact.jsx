@@ -1,7 +1,14 @@
 import '../App.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function Contact() {
+  useEffect(() => {
+    document.title = 'Contact - Whaletools | Get in Touch'
+    const metaDescription = document.querySelector('meta[name="description"]')
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Questions? Demo? Let\'s talk. Email us at hello@whaletools.com or use our contact form. 24-hour response time.')
+    }
+  }, [])
   const [formData, setFormData] = useState({
     name: '',
     email: '',

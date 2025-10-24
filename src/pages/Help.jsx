@@ -1,7 +1,14 @@
 import '../App.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function Help() {
+  useEffect(() => {
+    document.title = 'Help Center - Whaletools | Quick Answers'
+    const metaDescription = document.querySelector('meta[name="description"]')
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Quick answers to common questions. Setup, POS, inventory, pricing, and technical support. Search our help center or contact support.')
+    }
+  }, [])
   const [searchQuery, setSearchQuery] = useState('')
   const [expandedIdx, setExpandedIdx] = useState(null)
 
