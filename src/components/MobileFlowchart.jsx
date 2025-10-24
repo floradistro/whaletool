@@ -1,117 +1,183 @@
+import { useEffect, useRef } from 'react'
 import './MobileFlowchart.css'
 
 function MobileFlowchart() {
+  const canvasRef = useRef(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext('2d')
+    const dpr = window.devicePixelRatio || 1
+    
+    // Set canvas size
+    const width = 340
+    const height = 600
+    canvas.width = width * dpr
+    canvas.height = height * dpr
+    canvas.style.width = `${width}px`
+    canvas.style.height = `${height}px`
+    ctx.scale(dpr, dpr)
+
+    // Node definitions
+    const nodes = {
+      platform: { x: 170, y: 80, radius: 60, label: 'whaletools' },
+      ecom: { x: 100, y: 230, radius: 35, label: 'Ecom', color: '#3B82F6' },
+      pos: { x: 240, y: 230, radius: 35, label: 'POS', color: '#8B5CF6' },
+      stock: { x: 100, y: 330, radius: 35, label: 'Stock', color: '#06B6D4' },
+      vendors: { x: 240, y: 330, radius: 35, label: 'Vendors', color: '#F97316' },
+      reports: { x: 170, y: 430, radius: 35, label: 'Reports', color: '#EC4899' },
+      customer: { x: 170, y: 540, radius: 40, label: 'Customer', color: '#22C55E' }
+    }
+
+    // Connection lines
+    const connections = [
+      { from: 'platform', to: 'ecom' },
+      { from: 'platform', to: 'pos' },
+      { from: 'platform', to: 'stock' },
+      { from: 'platform', to: 'vendors' },
+      { from: 'platform', to: 'reports' },
+      { from: 'ecom', to: 'customer' },
+      { from: 'pos', to: 'customer' },
+      { from: 'stock', to: 'customer' },
+      { from: 'vendors', to: 'customer' },
+      { from: 'reports', to: 'customer' }
+    ]
+
+    let animationFrame
+    let dashOffset = 0
+
+    function drawConnection(from, to, opacity = 1) {
+      const gradient = ctx.createLinearGradient(from.x, from.y, to.x, to.y)
+      gradient.addColorStop(0, `rgba(255, 255, 255, ${0.15 * opacity})`)
+      gradient.addColorStop(1, `rgba(255, 255, 255, ${0.05 * opacity})`)
+
+      ctx.strokeStyle = gradient
+      ctx.lineWidth = 1.5
+      ctx.setLineDash([5, 5])
+      ctx.lineDashOffset = dashOffset
+
+      ctx.beginPath()
+      ctx.moveTo(from.x, from.y)
+      ctx.lineTo(to.x, to.y)
+      ctx.stroke()
+    }
+
+    function drawNode(node, isPlatform = false) {
+      // Outer glow
+      const gradient = ctx.createRadialGradient(
+        node.x, node.y, 0,
+        node.x, node.y, node.radius + 10
+      )
+      gradient.addColorStop(0, `${node.color || '#fff'}22`)
+      gradient.addColorStop(1, 'transparent')
+      
+      ctx.fillStyle = gradient
+      ctx.beginPath()
+      ctx.arc(node.x, node.y, node.radius + 10, 0, Math.PI * 2)
+      ctx.fill()
+
+      // Node background
+      const bgGradient = ctx.createRadialGradient(
+        node.x, node.y - node.radius * 0.3, 0,
+        node.x, node.y, node.radius
+      )
+      bgGradient.addColorStop(0, '#1a1a1a')
+      bgGradient.addColorStop(1, '#0a0a0a')
+      
+      ctx.fillStyle = bgGradient
+      ctx.beginPath()
+      ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2)
+      ctx.fill()
+
+      // Node border
+      ctx.strokeStyle = node.color ? `${node.color}66` : 'rgba(255, 255, 255, 0.15)'
+      ctx.lineWidth = isPlatform ? 3 : 2
+      ctx.setLineDash([])
+      ctx.beginPath()
+      ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2)
+      ctx.stroke()
+
+      // Inner highlight
+      const highlightGradient = ctx.createRadialGradient(
+        node.x, node.y - node.radius * 0.4, 0,
+        node.x, node.y, node.radius * 0.6
+      )
+      highlightGradient.addColorStop(0, 'rgba(255, 255, 255, 0.1)')
+      highlightGradient.addColorStop(1, 'transparent')
+      
+      ctx.fillStyle = highlightGradient
+      ctx.beginPath()
+      ctx.arc(node.x, node.y, node.radius * 0.8, 0, Math.PI * 2)
+      ctx.fill()
+
+      // Text
+      ctx.fillStyle = '#fff'
+      ctx.font = isPlatform ? 'bold 16px Inter' : 'bold 11px Inter'
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+      ctx.fillText(node.label, node.x, node.y + (isPlatform ? 0 : 2))
+    }
+
+    function animate() {
+      // Clear canvas
+      ctx.clearRect(0, 0, width, height)
+
+      // Draw background dots
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.03)'
+      for (let x = 0; x < width; x += 40) {
+        for (let y = 0; y < height; y += 40) {
+          ctx.beginPath()
+          ctx.arc(x, y, 1.5, 0, Math.PI * 2)
+          ctx.fill()
+        }
+      }
+
+      // Draw connections
+      connections.forEach(conn => {
+        const fromNode = nodes[conn.from]
+        const toNode = nodes[conn.to]
+        drawConnection(fromNode, toNode)
+      })
+
+      // Draw nodes
+      drawNode(nodes.ecom)
+      drawNode(nodes.pos)
+      drawNode(nodes.stock)
+      drawNode(nodes.vendors)
+      drawNode(nodes.reports)
+      drawNode(nodes.customer)
+      drawNode(nodes.platform, true)
+
+      // Draw "Stack" label
+      ctx.fillStyle = '#666'
+      ctx.font = '9px Inter'
+      ctx.textAlign = 'center'
+      ctx.letterSpacing = '1px'
+      ctx.fillText('STACK', 170, 190)
+
+      // Update animation
+      dashOffset -= 0.5
+      if (dashOffset < -10) dashOffset = 0
+
+      animationFrame = requestAnimationFrame(animate)
+    }
+
+    animate()
+
+    return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame)
+      }
+    }
+  }, [])
+
   return (
-    <div className="mobile-flowchart">
-      {/* whaletools Logo */}
-      <div className="mobile-node platform-node">
-        <img src="/yacht-club-logo.png" alt="whaletools" className="platform-logo" />
-        <div className="platform-title">whaletools</div>
-      </div>
-
-      {/* Connection Lines from Platform */}
-      <svg className="connection-lines" viewBox="0 0 300 500" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="rgba(255,255,255,0.2)" />
-            <stop offset="100%" stopColor="rgba(255,255,255,0.1)" />
-          </linearGradient>
-        </defs>
-        
-        {/* Lines from platform to components */}
-        <line x1="150" y1="100" x2="90" y2="200" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="5,5">
-          <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite" />
-        </line>
-        <line x1="150" y1="100" x2="210" y2="200" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="5,5">
-          <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite" />
-        </line>
-        <line x1="150" y1="100" x2="90" y2="280" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="5,5">
-          <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite" />
-        </line>
-        <line x1="150" y1="100" x2="210" y2="280" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="5,5">
-          <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite" />
-        </line>
-        <line x1="150" y1="100" x2="150" y2="360" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="5,5">
-          <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite" />
-        </line>
-        
-        {/* Lines from components to customer */}
-        <line x1="90" y1="240" x2="150" y2="430" stroke="url(#lineGradient)" strokeWidth="1.5" strokeDasharray="5,5">
-          <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite" />
-        </line>
-        <line x1="210" y1="240" x2="150" y2="430" stroke="url(#lineGradient)" strokeWidth="1.5" strokeDasharray="5,5">
-          <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite" />
-        </line>
-        <line x1="90" y1="320" x2="150" y2="430" stroke="url(#lineGradient)" strokeWidth="1.5" strokeDasharray="5,5">
-          <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite" />
-        </line>
-        <line x1="210" y1="320" x2="150" y2="430" stroke="url(#lineGradient)" strokeWidth="1.5" strokeDasharray="5,5">
-          <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite" />
-        </line>
-        <line x1="150" y1="400" x2="150" y2="430" stroke="url(#lineGradient)" strokeWidth="1.5" strokeDasharray="5,5">
-          <animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite" />
-        </line>
-      </svg>
-
-      {/* Stack Label */}
-      <div className="stack-label">Stack</div>
-
-      {/* Component Grid */}
-      <div className="components-grid">
-        <div className="mobile-node component-node ecom-node">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-            <rect x="2" y="3" width="20" height="14" rx="2"/>
-            <path d="M8 21h8M12 17v4"/>
-          </svg>
-          <span>Ecom</span>
-        </div>
-        <div className="mobile-node component-node pos-node">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-            <rect x="1" y="4" width="22" height="16" rx="2"/>
-            <path d="M1 10h22"/>
-          </svg>
-          <span>POS</span>
-        </div>
-      </div>
-
-      <div className="components-grid">
-        <div className="mobile-node component-node stock-node">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-          </svg>
-          <span>Stock</span>
-        </div>
-        <div className="mobile-node component-node vendors-node">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-          </svg>
-          <span>Vendors</span>
-        </div>
-      </div>
-
-      <div className="components-grid single">
-        <div className="mobile-node component-node reports-node">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-            <line x1="12" y1="20" x2="12" y2="10"/>
-            <line x1="18" y1="20" x2="18" y2="4"/>
-            <line x1="6" y1="20" x2="6" y2="16"/>
-          </svg>
-          <span>Reports</span>
-        </div>
-      </div>
-
-      {/* Customer Node */}
-      <div className="mobile-node customer-node">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-          <circle cx="12" cy="7" r="4"/>
-        </svg>
-        <span>Customer</span>
-      </div>
+    <div className="mobile-flowchart-canvas">
+      <canvas ref={canvasRef} />
     </div>
   )
 }
 
 export default MobileFlowchart
-
