@@ -78,7 +78,7 @@ function Features() {
           <div style={{maxWidth: '1200px', margin: '0 auto'}}>
             
             {/* Main Features Grid */}
-            <div style={{
+            <div className="features-grid" style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(2, 1fr)',
               gap: '32px',
@@ -342,7 +342,7 @@ function Features() {
                   Full REST API. Webhook support. MCP integration. Build whatever you need.
                 </p>
 
-                <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px'}}>
+                <div className="developer-grid" style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px'}}>
                   <div style={{
                     padding: '32px',
                     background: 'rgba(10, 10, 10, 0.6)',

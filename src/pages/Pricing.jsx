@@ -132,7 +132,7 @@ function Pricing() {
                   borderRadius: '16px',
                   marginBottom: '40px'
                 }}>
-                  <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', fontSize: '15px', color: 'var(--gray-300)'}}>
+                  <div className="pricing-features-grid" style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', fontSize: '15px', color: 'var(--gray-300)'}}>
                     <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
                       <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <circle cx="10" cy="10" r="10" fill="rgba(255, 255, 255, 0.1)"/>
@@ -208,7 +208,7 @@ function Pricing() {
 
           {/* Key Points */}
           <div style={{maxWidth: '900px', margin: '0 auto 80px'}}>
-            <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px'}}>
+            <div className="pricing-benefits-grid" style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px'}}>
               
               <div style={{
                 textAlign: 'center',

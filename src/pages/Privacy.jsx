@@ -96,7 +96,7 @@ function Privacy() {
                 </p>
               </div>
 
-              <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '60px'}}>
+              <div className="privacy-grid" style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '60px'}}>
                 <div style={{
                   padding: '32px',
                   background: 'rgba(10, 10, 10, 0.3)',

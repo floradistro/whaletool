@@ -2248,6 +2248,100 @@ body {
   .footer-links {
     grid-template-columns: 1fr;
   }
+
+  /* Footer logo on mobile */
+  .footer-logo-img {
+    height: 28px !important;
+  }
+
+  /* AI Terminal Mobile */
+  .ai-terminal {
+    max-width: 100%;
+    margin: 0 -4px;
+  }
+
+  .terminal-body {
+    font-size: 12px;
+    padding: 16px;
+    min-height: 300px;
+  }
+
+  .terminal-title {
+    font-size: 11px;
+  }
+
+  /* Features Page - Stack Grid */
+  .features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+    margin-bottom: 60px !important;
+  }
+
+  /* Developer Cards - Stack */
+  .developer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  /* About Values Grid - Stack */
+  .about-values-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  /* Contact Grid - Stack */
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  /* Pricing Benefits Grid - Stack */
+  .pricing-benefits-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* Privacy Grid - Stack */
+  .privacy-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* Pricing Features Inside Card - Stack */
+  .pricing-features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* Logo sizes */
+  img[style*="height: '120px'"],
+  img[style*="height: '100px'"],
+  img[style*="height: '80px'"] {
+    height: 60px !important;
+  }
+
+  /* Hero Logo on mobile */
+  .hero-container img[style*="height:"] {
+    height: 60px !important;
+  }
+
+  /* Compact padding for mobile */
+  .mystery-section {
+    padding: 40px 24px !important;
+  }
+
+  .mystery-title {
+    font-size: 28px !important;
+  }
+
+  /* CTA sections smaller */
+  .cta-container h2 {
+    font-size: 32px !important;
+  }
+
+  .cta-container p {
+    font-size: 16px !important;
+  }
 }
 
 /* Smooth Scroll */

@@ -77,7 +77,7 @@ function About() {
           
           {/* Values Grid */}
           <div style={{maxWidth: '1000px', margin: '0 auto'}}>
-            <div style={{
+            <div className="about-values-grid" style={{
               display: 'grid', 
               gridTemplateColumns: 'repeat(2, 1fr)', 
               gap: '32px',

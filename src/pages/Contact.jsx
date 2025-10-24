@@ -96,7 +96,7 @@ function Contact() {
       {/* Contact Content */}
       <section className="features-section" style={{paddingTop: '0px', paddingBottom: '100px'}}>
         <div className="features-container">
-          <div style={{maxWidth: '900px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px'}}>
+          <div className="contact-grid" style={{maxWidth: '900px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px'}}>
             
             {/* Contact Form */}
             <div style={{animation: 'fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s backwards'}}>
