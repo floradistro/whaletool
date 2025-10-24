@@ -2117,39 +2117,58 @@ body {
   letter-spacing: 0.02em;
 }
 
-/* Responsive */
+/* Responsive - Heavy Mobile Optimization */
 @media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
   .performance-chart {
-    max-width: 90%;
-    height: 320px;
-    padding: 24px;
-    opacity: 0.08;
+    display: none;
   }
 
   .nav {
     display: none;
   }
 
+  /* Header - Compact */
+  .header {
+    height: 56px;
+  }
+
+  .header-container {
+    padding: 0 12px;
+  }
+
+  .logo-img {
+    height: 32px;
+  }
+
+  .signup-btn {
+    padding: 0 16px;
+    height: 32px;
+    font-size: 13px;
+  }
+
+  /* Hero - Minimal Padding, Compact */
   .hero {
-    padding: 160px 20px 80px;
+    padding: 120px 12px 60px;
   }
 
-  .flow-wrapper {
-    height: 400px;
-  }
-
-  .canvas-header {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  .hero-glow {
+    display: none;
   }
 
   .hero-title {
-    font-size: 48px;
+    font-size: 44px;
     letter-spacing: -0.04em;
+    margin-bottom: 20px;
   }
 
   .hero-subtitle {
-    font-size: 18px;
+    font-size: 16px;
+    margin-bottom: 32px;
+    line-height: 1.4;
   }
 
   .hide-mobile {
@@ -2157,65 +2176,117 @@ body {
   }
 
   .hero-actions {
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
+    gap: 8px;
   }
 
   .btn-primary,
   .btn-secondary {
-    width: 100%;
+    flex: 1;
     justify-content: center;
+    padding: 0 16px;
+    height: 40px;
+    font-size: 13px;
   }
 
+  /* Stats - Horizontal Scroll, Edge to Edge */
   .hero-stats {
-    gap: 12px;
-    margin-top: 60px;
+    gap: 8px;
+    margin-top: 40px;
     flex-wrap: nowrap !important;
     overflow-x: auto;
     justify-content: flex-start;
-    padding: 0 4px;
+    padding: 0;
+    margin-left: -12px;
+    margin-right: -12px;
+    padding-left: 12px;
+    padding-right: 12px;
+    scrollbar-width: none;
+  }
+
+  .hero-stats::-webkit-scrollbar {
+    display: none;
   }
 
   .stat-card {
-    min-width: 110px;
-    padding: 20px 16px;
+    min-width: 100px;
+    padding: 16px 12px;
     flex-shrink: 0;
   }
   
   .stat-value {
-    font-size: 28px;
+    font-size: 24px;
+    margin-bottom: 6px;
   }
   
   .stat-label {
+    font-size: 9px;
+  }
+
+  /* Hero Cards - Hide on Mobile */
+  .hero-cards {
+    display: none;
+  }
+
+  /* Flowchart - Compact */
+  .flowchart-section {
+    padding: 60px 0 80px;
+  }
+
+  .canvas-container {
+    padding: 0 12px;
+  }
+
+  .flow-wrapper {
+    height: 320px;
+  }
+
+  .canvas-header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .header-label {
     font-size: 10px;
   }
 
+  /* Sections - Minimal Padding */
   .features-section,
   .pricing-section,
   .cta-section {
-    padding: 80px 20px;
+    padding: 60px 12px;
+  }
+
+  .section-header {
+    margin-bottom: 48px;
   }
 
   .section-title,
   .pricing-container h2,
   .cta-container h2 {
-    font-size: 40px;
+    font-size: 36px;
     letter-spacing: -0.03em;
+    margin-bottom: 16px;
   }
 
   .section-subtitle {
-    font-size: 16px;
+    font-size: 15px;
+    line-height: 1.5;
   }
 
+  /* Features List - Compact */
   .features-list {
     max-width: 100%;
-    padding: 0 8px;
+    padding: 0;
   }
 
   .feature-item {
-    flex-direction: column;
+    flex-direction: row;
     gap: 16px;
-    padding: 32px 0;
+    padding: 24px 0;
+    align-items: flex-start;
   }
 
   .feature-item:hover {
@@ -2223,129 +2294,216 @@ body {
   }
 
   .feature-number {
-    font-size: 13px;
-    min-width: auto;
-    padding-top: 0;
+    font-size: 12px;
+    min-width: 28px;
+    padding-top: 2px;
   }
 
   .feature-content h3 {
-    font-size: 20px;
+    font-size: 18px;
+    margin-bottom: 6px;
   }
 
   .feature-content p {
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 1.5;
   }
 
+  /* Mystery Section - Compact */
   .mystery-section {
-    margin-top: 80px;
-    padding: 48px 32px;
+    margin-top: 48px;
+    padding: 32px 20px;
+    border-radius: 12px;
+  }
+
+  .mystery-badge {
+    font-size: 10px;
+    padding: 5px 10px;
+    margin-bottom: 16px;
   }
 
   .mystery-title {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  .mystery-cta {
+    height: 40px;
+    padding: 0 20px;
+    font-size: 14px;
+  }
+
+  /* Pricing - Compact */
+  .pricing-container {
+    max-width: 100%;
+  }
+
+  .pricing-card {
+    padding: 32px 20px;
+    border-radius: 12px;
+  }
+
+  .price-amount {
+    font-size: 48px;
+  }
+
+  .price-period {
+    font-size: 18px;
+  }
+
+  .pricing-features {
+    margin-bottom: 32px;
+  }
+
+  .pricing-features li {
+    font-size: 13px;
+    padding: 12px 0;
+  }
+
+  .pricing-btn {
+    height: 44px;
+    font-size: 14px;
+  }
+
+  /* CTA - Compact */
+  .cta-glow {
+    display: none;
+  }
+
+  .cta-container h2 {
     font-size: 32px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .cta-container p {
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 32px;
+  }
+
+  .btn-large {
+    height: 44px;
+    padding: 0 28px;
+    font-size: 14px;
+  }
+
+  /* Footer - Compact */
+  .footer {
+    padding: 48px 12px 24px;
   }
 
   .footer-content {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 32px;
+    margin-bottom: 32px;
   }
 
   .footer-links {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
   }
 
-  /* Footer logo on mobile */
-  .footer-logo-img {
-    height: 28px !important;
+  .footer-column h4 {
+    font-size: 10px;
+    margin-bottom: 8px;
+  }
+
+  .footer-column a {
+    font-size: 13px;
+  }
+
+  .footer-brand p {
+    font-size: 13px;
+  }
+
+  .footer-bottom p {
+    font-size: 12px;
   }
 
   /* AI Terminal Mobile */
   .ai-terminal {
     max-width: 100%;
-    margin: 0 -4px;
+    margin: 0;
   }
 
   .terminal-body {
-    font-size: 12px;
-    padding: 16px;
-    min-height: 300px;
+    font-size: 11px;
+    padding: 12px;
+    min-height: 280px;
   }
 
   .terminal-title {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   /* Features Page - Stack Grid */
   .features-grid {
     grid-template-columns: 1fr !important;
-    gap: 24px !important;
-    margin-bottom: 60px !important;
+    gap: 16px !important;
+    margin-bottom: 48px !important;
   }
 
   /* Developer Cards - Stack */
   .developer-grid {
     grid-template-columns: 1fr !important;
-    gap: 24px !important;
+    gap: 16px !important;
   }
 
   /* About Values Grid - Stack */
   .about-values-grid {
     grid-template-columns: 1fr !important;
-    gap: 24px !important;
+    gap: 16px !important;
   }
 
   /* Contact Grid - Stack */
   .contact-grid {
     grid-template-columns: 1fr !important;
-    gap: 40px !important;
+    gap: 32px !important;
   }
 
   /* Pricing Benefits Grid - Stack */
   .pricing-benefits-grid {
     grid-template-columns: 1fr !important;
-    gap: 20px !important;
+    gap: 16px !important;
   }
 
   /* Privacy Grid - Stack */
   .privacy-grid {
     grid-template-columns: 1fr !important;
-    gap: 20px !important;
+    gap: 16px !important;
   }
 
   /* Pricing Features Inside Card - Stack */
   .pricing-features-grid {
     grid-template-columns: 1fr !important;
-    gap: 16px !important;
+    gap: 12px !important;
   }
 
   /* Logo sizes */
   img[style*="height: '120px'"],
   img[style*="height: '100px'"],
   img[style*="height: '80px'"] {
-    height: 60px !important;
+    height: 48px !important;
   }
 
   /* Hero Logo on mobile */
   .hero-container img[style*="height:"] {
-    height: 60px !important;
+    height: 48px !important;
   }
 
-  /* Compact padding for mobile */
-  .mystery-section {
-    padding: 40px 24px !important;
+  /* Geometric Background - Reduce for Performance */
+  .gradient-orb {
+    display: none;
   }
 
-  .mystery-title {
-    font-size: 28px !important;
+  .floating-shapes .shape {
+    display: none;
   }
 
-  /* CTA sections smaller */
-  .cta-container h2 {
-    font-size: 32px !important;
-  }
-
-  .cta-container p {
-    font-size: 16px !important;
+  /* Hide some decorative elements */
+  .shape-1, .shape-2, .shape-3, .shape-4, .shape-5, .shape-6 {
+    display: none;
   }
 }
 
