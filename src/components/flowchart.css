@@ -354,58 +354,58 @@
   }
 
   .reactflow-container {
-    height: 720px;
+    height: 350px;
     width: 100%;
   }
 
   /* Platform Node - Compact on Mobile */
   .workflow-node.platform {
-    width: 120px;
-    height: 160px;
+    width: 110px;
+    height: 150px;
   }
 
   .workflow-node.platform .node-icon {
-    width: 120px;
-    height: 120px;
+    width: 110px;
+    height: 110px;
   }
 
   .workflow-node.platform .node-title {
-    font-size: 18px;
-    margin-top: -8px;
+    font-size: 16px;
+    margin-top: -6px;
   }
 
   /* Component Nodes - Compact */
   .workflow-node {
-    width: 80px;
-    height: 80px;
-    border-width: 3px;
+    width: 70px;
+    height: 70px;
+    border-width: 2px;
   }
 
   .node-icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 
   .node-title {
-    font-size: 10px;
+    font-size: 9px;
     margin-top: 4px;
   }
 
   /* Customer Node - Compact */
   .workflow-node.customer {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     border-width: 3px;
   }
 
   .workflow-node.customer .node-icon {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
   }
 
   .workflow-node.customer .node-title {
-    font-size: 11px;
-    margin-top: 6px;
+    font-size: 10px;
+    margin-top: 5px;
   }
 
   /* Edges - Thinner on Mobile */
