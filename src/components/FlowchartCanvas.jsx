@@ -9,7 +9,6 @@ import {
 import '@xyflow/react/dist/style.css'
 import './flowchart.css'
 import { useState, useEffect } from 'react'
-import MobileFlowchart from './MobileFlowchart'
 
 const CustomNode = ({ data }) => {
   const isPlatform = data.type === 'platform'
@@ -244,22 +243,102 @@ function FlowchartCanvas() {
   const [nodesState] = useNodesState(nodes)
   const [edgesState] = useEdgesState(edges)
 
-  // Use simple custom flowchart for mobile, ReactFlow for desktop
-  if (isMobile) {
-    return (
-      <section className="flowchart-section">
-        <MobileFlowchart />
-      </section>
-    )
-  }
+  // Mobile vertical waterfall nodes
+  const mobileNodes = [
+    { 
+      id: 'whaletools', 
+      type: 'custom',
+      position: { x: 100, y: 50 }, 
+      data: { 
+        label: 'whaletools',
+        icon: <img src="/yacht-club-logo.png" alt="whaletools" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />,
+        type: 'platform'
+      },
+    },
+    { 
+      id: 'ecom', 
+      type: 'custom',
+      position: { x: 115, y: 250 }, 
+      data: { 
+        label: 'Ecom',
+        icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>,
+        type: 'component',
+        color: 'blue'
+      },
+    },
+    { 
+      id: 'pos', 
+      type: 'custom',
+      position: { x: 115, y: 350 }, 
+      data: { 
+        label: 'POS',
+        icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>,
+        type: 'component',
+        color: 'purple'
+      },
+    },
+    { 
+      id: 'inv', 
+      type: 'custom',
+      position: { x: 115, y: 450 }, 
+      data: { 
+        label: 'Stock',
+        icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>,
+        type: 'component',
+        color: 'cyan'
+      },
+    },
+    { 
+      id: 'vendors', 
+      type: 'custom',
+      position: { x: 115, y: 550 }, 
+      data: { 
+        label: 'Vendors',
+        icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>,
+        type: 'component',
+        color: 'orange'
+      },
+    },
+    { 
+      id: 'analytics', 
+      type: 'custom',
+      position: { x: 115, y: 650 }, 
+      data: { 
+        label: 'Reports',
+        icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>,
+        type: 'component',
+        color: 'pink'
+      },
+    },
+    { 
+      id: 'customer', 
+      type: 'custom',
+      position: { x: 107, y: 780 }, 
+      data: { 
+        label: 'Customer',
+        icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+        type: 'customer'
+      },
+    },
+  ]
+
+  // Mobile vertical waterfall edges
+  const mobileEdges = [
+    { id: 'w-e1', source: 'whaletools', target: 'ecom', animated: true },
+    { id: 'e-p', source: 'ecom', target: 'pos', animated: true },
+    { id: 'p-i', source: 'pos', target: 'inv', animated: true },
+    { id: 'i-v', source: 'inv', target: 'vendors', animated: true },
+    { id: 'v-a', source: 'vendors', target: 'analytics', animated: true },
+    { id: 'a-c', source: 'analytics', target: 'customer', animated: true },
+  ]
 
   return (
     <section className="flowchart-section">
       <div className="canvas-wrapper">
         <div className="reactflow-container">
           <ReactFlow
-            nodes={nodesState}
-            edges={edgesState}
+            nodes={isMobile ? mobileNodes : nodesState}
+            edges={isMobile ? mobileEdges : edgesState}
             nodeTypes={nodeTypes}
             nodesDraggable={false}
             nodesConnectable={false}
@@ -270,13 +349,14 @@ function FlowchartCanvas() {
             zoomOnPinch={false}
             preventScrolling={false}
             proOptions={{ hideAttribution: true }}
-            defaultViewport={{ x: 100, y: 0, zoom: 0.8 }}
+            defaultViewport={isMobile ? { x: 0, y: 0, zoom: 1 } : { x: 100, y: 0, zoom: 0.8 }}
+            fitView={false}
           >
             <Background 
               variant="dots"
               color="rgba(255,255,255,0.08)" 
-              gap={24}
-              size={1.5}
+              gap={isMobile ? 20 : 24}
+              size={isMobile ? 1 : 1.5}
             />
           </ReactFlow>
         </div>

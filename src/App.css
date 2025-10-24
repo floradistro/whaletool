@@ -2229,10 +2229,21 @@ body {
     display: none;
   }
 
-  /* Flowchart - Use custom mobile component */
+  /* Flowchart - Vertical Waterfall */
   .flowchart-section {
     padding: 60px 0;
     overflow: hidden;
+    width: 100%;
+  }
+
+  .canvas-wrapper {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .reactflow-container {
+    height: 900px;
     width: 100%;
   }
 
