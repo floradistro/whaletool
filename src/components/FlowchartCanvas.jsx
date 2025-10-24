@@ -240,12 +240,12 @@ function FlowchartCanvas() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
   
-  // Mobile-optimized node positions (vertical layout, fits 375px viewport)
+  // Mobile-optimized node positions (centered, compact layout for 390px viewport)
   const mobileNodes = [
     { 
       id: 'whaletools', 
       type: 'custom',
-      position: { x: 20, y: 10 }, 
+      position: { x: 125, y: 10 }, 
       data: { 
         label: 'whaletools',
         icon: <img src="/yacht-club-logo.png" alt="whaletools" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />,
@@ -255,7 +255,7 @@ function FlowchartCanvas() {
     { 
       id: 'stack-label', 
       type: 'custom',
-      position: { x: 85, y: 220 }, 
+      position: { x: 192, y: 200 }, 
       data: { 
         label: 'Stack',
         type: 'label'
@@ -264,7 +264,7 @@ function FlowchartCanvas() {
     { 
       id: 'ecom', 
       type: 'custom',
-      position: { x: 20, y: 250 }, 
+      position: { x: 115, y: 235 }, 
       data: { 
         label: 'Ecom',
         icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>,
@@ -275,7 +275,7 @@ function FlowchartCanvas() {
     { 
       id: 'pos', 
       type: 'custom',
-      position: { x: 120, y: 250 }, 
+      position: { x: 215, y: 235 }, 
       data: { 
         label: 'POS',
         icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>,
@@ -286,7 +286,7 @@ function FlowchartCanvas() {
     { 
       id: 'inv', 
       type: 'custom',
-      position: { x: 20, y: 350 }, 
+      position: { x: 115, y: 325 }, 
       data: { 
         label: 'Stock',
         icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>,
@@ -297,7 +297,7 @@ function FlowchartCanvas() {
     { 
       id: 'vendors', 
       type: 'custom',
-      position: { x: 120, y: 350 }, 
+      position: { x: 215, y: 325 }, 
       data: { 
         label: 'Vendors',
         icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>,
@@ -308,7 +308,7 @@ function FlowchartCanvas() {
     { 
       id: 'analytics', 
       type: 'custom',
-      position: { x: 70, y: 450 }, 
+      position: { x: 165, y: 415 }, 
       data: { 
         label: 'Reports',
         icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>,
@@ -319,7 +319,7 @@ function FlowchartCanvas() {
     { 
       id: 'customer', 
       type: 'custom',
-      position: { x: 65, y: 550 }, 
+      position: { x: 162, y: 510 }, 
       data: { 
         label: 'Customer',
         icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
@@ -348,7 +348,7 @@ function FlowchartCanvas() {
             zoomOnPinch={false}
             preventScrolling={false}
             proOptions={{ hideAttribution: true }}
-            defaultViewport={isMobile ? { x: 50, y: 0, zoom: 0.85 } : { x: 100, y: 0, zoom: 0.8 }}
+            defaultViewport={isMobile ? { x: 0, y: 0, zoom: 0.9 } : { x: 100, y: 0, zoom: 0.8 }}
           >
             <Background 
               variant="dots"
