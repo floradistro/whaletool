@@ -5,17 +5,28 @@
   padding: 120px 24px;
   background: transparent;
   font-family: 'Roboto', sans-serif;
+  width: 100%;
 }
 
 .canvas-wrapper {
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .reactflow-container {
-  height: 650px;
+  height: 700px;
   background: transparent;
   overflow: hidden;
+  border-radius: 12px;
+  position: relative;
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+
+.reactflow-container.flowchart-hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Custom Workflow Nodes */
@@ -26,8 +37,11 @@
   padding: 0;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .workflow-node:hover {
@@ -95,6 +109,7 @@
   gap: 6px;
   padding: 8px;
   height: 100%;
+  width: 100%;
   text-align: center;
 }
 
@@ -136,8 +151,8 @@
   background: transparent;
   border: none;
   box-shadow: none;
-  width: 280px;
-  height: 360px;
+  width: 320px;
+  height: 400px;
 }
 
 .workflow-node.platform .node-content {
@@ -146,8 +161,8 @@
 }
 
 .workflow-node.platform .node-icon {
-  width: 280px;
-  height: 280px;
+  width: 320px;
+  height: 320px;
   animation: float 6s ease-in-out infinite, glow 4s ease-in-out infinite;
 }
 
@@ -182,12 +197,12 @@
 
 .workflow-node.platform .node-title {
   display: block;
-  font-size: 42px;
+  font-size: 48px;
   font-weight: 700;
   color: #fff;
   font-family: 'Roboto', sans-serif;
   letter-spacing: -0.02em;
-  margin-top: -20px;
+  margin-top: -24px;
   text-transform: lowercase;
 }
 
@@ -214,17 +229,17 @@
   border: 5px solid rgba(34, 197, 94, 0.3);
   background: linear-gradient(135deg, rgba(34, 197, 94, 0.05), rgba(22, 163, 74, 0.02));
   border-radius: 50%;
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
 }
 
 .workflow-node.customer .node-content {
-  padding: 10px;
+  padding: 12px;
 }
 
 .workflow-node.customer .node-icon {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
 }
 
 .workflow-node.customer .node-icon svg {
@@ -234,10 +249,10 @@
 
 .workflow-node.customer .node-title {
   color: #fff;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   font-family: 'Roboto', sans-serif;
-  margin-top: 8px;
+  margin-top: 10px;
   letter-spacing: 0em;
 }
 
@@ -247,31 +262,13 @@
   box-shadow: 0 8px 32px rgba(34, 197, 94, 0.15);
 }
 
-/* Label Node */
-.workflow-node.label {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  width: auto;
-  height: auto;
+/* ReactFlow Viewport - Lock in place */
+.react-flow__viewport {
+  pointer-events: none !important;
 }
 
-.workflow-node.label .node-content {
-  padding: 8px 16px;
-}
-
-.workflow-node.label .node-title {
-  font-size: 11px;
-  font-weight: 700;
-  color: #666;
-  font-family: 'Roboto', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
-.workflow-node.label:hover {
-  transform: none;
-  box-shadow: none;
+.react-flow__pane {
+  cursor: default !important;
 }
 
 /* ReactFlow Edges */
@@ -295,35 +292,6 @@
   to { stroke-dashoffset: -10; }
 }
 
-/* Particle animation on edges */
-.react-flow__edge::before {
-  content: '';
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 50%;
-  animation: particle 3s linear infinite;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-
-@keyframes particle {
-  0% {
-    offset-distance: 0%;
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    offset-distance: 100%;
-    opacity: 0;
-  }
-}
-
 /* Background */
 .react-flow__background {
   background-color: transparent !important;
@@ -339,82 +307,193 @@
   display: none !important;
 }
 
-/* Responsive - Mobile Vertical Waterfall */
+/* Controls Hint - Hidden since no interactions */
+.flow-controls-hint {
+  display: none;
+}
+
+.controls-hint {
+  display: none;
+}
+
+/* Loading State */
+.flowchart-loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive - Mobile Optimizations */
 @media (max-width: 768px) {
   .flowchart-section {
     padding: 60px 0;
-    width: 100%;
-    overflow: hidden;
+    width: 100vw;
   }
 
   .canvas-wrapper {
     padding: 0;
-    margin: 0;
+    max-width: 100%;
     width: 100%;
   }
 
   .reactflow-container {
-    height: 350px;
+    height: 650px;
+    border-radius: 0;
     width: 100%;
   }
 
-  /* Platform Node - Compact on Mobile */
+  /* Platform Node - Mobile */
   .workflow-node.platform {
-    width: 110px;
-    height: 150px;
+    width: 340px !important;
+    height: 420px !important;
+  }
+
+  .workflow-node.platform .node-content {
+    padding: 0;
   }
 
   .workflow-node.platform .node-icon {
-    width: 110px;
-    height: 110px;
+    width: 340px;
+    height: 340px;
   }
 
   .workflow-node.platform .node-title {
-    font-size: 16px;
-    margin-top: -6px;
+    font-size: 46px;
+    margin-top: -18px;
   }
 
-  /* Component Nodes - Compact */
-  .workflow-node {
-    width: 70px;
-    height: 70px;
-    border-width: 2px;
+  /* Component Nodes - Mobile */
+  .workflow-node.component {
+    width: 110px !important;
+    height: 110px !important;
+    border-width: 4px;
   }
 
-  .node-icon {
-    width: 18px;
-    height: 18px;
+  .workflow-node.component .node-content {
+    padding: 8px;
+    gap: 5px;
   }
 
-  .node-title {
-    font-size: 9px;
-    margin-top: 4px;
+  .workflow-node.component .node-icon {
+    width: 28px;
+    height: 28px;
   }
 
-  /* Customer Node - Compact */
+  .workflow-node.component .node-title {
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  /* Customer Node - Mobile */
   .workflow-node.customer {
-    width: 90px;
-    height: 90px;
-    border-width: 3px;
+    width: 150px !important;
+    height: 150px !important;
+    border-width: 4px;
+  }
+
+  .workflow-node.customer .node-content {
+    padding: 10px;
+    gap: 6px;
   }
 
   .workflow-node.customer .node-icon {
-    width: 26px;
-    height: 26px;
+    width: 40px;
+    height: 40px;
   }
 
   .workflow-node.customer .node-title {
-    font-size: 10px;
-    margin-top: 5px;
+    font-size: 13px;
+    margin-top: 6px;
   }
 
   /* Edges - Thinner on Mobile */
   .react-flow__edge-path {
-    stroke-width: 2px !important;
+    stroke-width: 1.5px !important;
   }
 
   /* Background - Smaller Dots */
   .react-flow__background-pattern {
     opacity: 0.4 !important;
+  }
+
+  .controls-hint {
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reactflow-container {
+    height: 600px;
+  }
+
+  .workflow-node.platform {
+    width: 300px !important;
+    height: 380px !important;
+  }
+
+  .workflow-node.platform .node-icon {
+    width: 300px;
+    height: 300px;
+  }
+
+  .workflow-node.platform .node-title {
+    font-size: 42px;
+    margin-top: -16px;
+  }
+
+  .workflow-node.component {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  .workflow-node.component .node-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .workflow-node.component .node-title {
+    font-size: 11px;
+  }
+
+  .workflow-node.customer {
+    width: 130px !important;
+    height: 130px !important;
+  }
+
+  .workflow-node.customer .node-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .workflow-node.customer .node-title {
+    font-size: 12px;
+  }
+}
+
+/* Touch Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .workflow-node:hover {
+    transform: scale(1);
+  }
+  
+  .workflow-node:active {
+    transform: scale(0.95);
   }
 }
