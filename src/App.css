@@ -2233,21 +2233,30 @@ body {
   .flowchart-section {
     padding: 60px 0;
     overflow: hidden;
+    width: 100%;
+    max-width: 100vw;
   }
 
   .canvas-container {
     padding: 0;
     width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .canvas-wrapper {
     padding: 0;
     margin: 0;
     width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .flow-wrapper {
     height: 620px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .canvas-header {

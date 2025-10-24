@@ -343,17 +343,23 @@
 @media (max-width: 768px) {
   .flowchart-section {
     padding: 60px 0;
+    overflow: hidden;
+    width: 100%;
   }
 
   .canvas-wrapper {
     padding: 0;
     margin: 0;
     width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
   }
 
   .reactflow-container {
     height: 620px;
     width: 100%;
+    max-width: 100%;
+    overflow: hidden !important;
   }
 
   /* Platform Node - Smaller on Mobile */
